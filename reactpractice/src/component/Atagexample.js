@@ -25,7 +25,7 @@ function Header() {
 function Body() {
   const num = [1, 2, 3];
   return (
-    <body>
+    <div>
       <div className="back">
         <h1>Lorem ipsum dolor sit.</h1>
         <p>
@@ -34,7 +34,13 @@ function Body() {
           impedit magni vero expedita aliquid sit exercitationem amet aspernatur
           cumque, ad fuga.
         </p>
-        <button>버튼</button>
+        <button
+          onClick={() => {
+            alert("Button!");
+          }}
+        >
+          버튼
+        </button>
       </div>
       <div className="back1">
         <div className="centerContainer">
@@ -45,9 +51,9 @@ function Body() {
           </p>
         </div>
         <div className="containerBox">
-          {num.map(() => {
+          {num.map((a, i) => {
             return (
-              <div className="container">
+              <div key={i} className="container">
                 <h3>Lorem ipsum dolor sit.</h3>
                 <p>
                   Lorem, ipsum dolor sit amet consectetur adipisicing elit.
@@ -58,7 +64,7 @@ function Body() {
           })}
         </div>
       </div>
-    </body>
+    </div>
   );
 }
 
