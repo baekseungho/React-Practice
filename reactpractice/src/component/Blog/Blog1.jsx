@@ -1,23 +1,21 @@
 import "./Blog.css";
 import { useState } from "react";
 
-function Modal(props) {
+function Modal1(props) {
   return (
     <div className="modal">
-      <h4>{props.title[props.modalTitle]}</h4>
-      <p>Lorem, ipsum.</p>
-      <button onClick={props.closeModal}>닫기</button>
+      <h4>{props.title}</h4>
+      <p>Lorem, ipsum.{props.name}</p>
+      <button onClick={() => props.closeModal}>닫기</button>
     </div>
   );
 }
 
-function Blog() {
-  // 모달창을 띄우기 위한 상태값
+function Blog1() {
   const [modal, setModal] = useState(false);
-  // 모달창에 표시될 제목 글의 인덱스
-  let [modalTitle, setModalTitle] = useState(0);
   const [titles, setTitle] = useState(["Title1", "Title2", "Title3"]);
   const name = ["김이순신", "박안중근", "백세종대왕"];
+  const [num, setNum] = useState(0);
 
   return (
     <div>
@@ -30,15 +28,8 @@ function Blog() {
             key={index}
             className="list"
             onClick={() => {
-              return modal && modalTitle === index
-                ? setModal(false)
-                : (setModal(true), setModalTitle(index));
-              // if (modal && modalTitle === index) {
-              //   setModal(false);
-              // } else {
-              //   setModal(true);
-              //   setModalTitle(index);
-              // }
+              setNum(index);
+              index === num ? setModal(false) : setModal(true);
             }}
           >
             <h4>{title}</h4>
@@ -55,15 +46,18 @@ function Blog() {
           </div>
         );
       })}
-      {modal && (
-        <Modal
-          modalTitle={modalTitle}
-          title={titles}
-          closeModal={() => setModal(false)}
-        />
-      )}
+      {titles.map((title, index) => {
+        return modal === false ? null : num === index ? (
+          <Modal1
+            key={index}
+            title={title}
+            name={name[index]}
+            closeModal={() => setModal(false)}
+          />
+        ) : null;
+      })}
     </div>
   );
 }
 
-export default Blog;
+export default Blog1;
